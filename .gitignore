@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.env
+env/
+.venv/
+ENV/
+
+# Jupyter
+*.ipynb
+
+# Data
+*.csv
+
+# Virtual environment
+venv/
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+
+# VS Code
+.vscode/
+
+# Logs
+*.log
+
+# Git
+.DS_Store
+.idea/
