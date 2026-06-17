@@ -8,12 +8,6 @@ env/
 .venv/
 ENV/
 
-# Jupyter
-*.ipynb
-
-# Data
-*.csv
-
 # Virtual environment
 venv/
 

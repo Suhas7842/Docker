@@ -1,0 +1,46 @@
+version: 3.8
+services:
+  flasgger:
+    build: .
+    container_name: bank-auth-flasgger
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/usr/app
+    environment:
+      FLASK_APP: flasgger_app.py
+      FLASK_ENV: development
+    command: python flasgger_app.py
+    networks:
+      - bank-auth-network
+
+  flask-app:
+    build: .
+    container_name: bank-auth-flask
+    ports:
+      - "5001:5000"
+    volumes:
+      - .:/usr/app
+    environment:
+      FLASK_APP: flask_app.py
+      FLASK_ENV: development
+    command: python flask_app.py
+    networks:
+      - bank-auth-network
+
+  streamlit-ui:
+    build: .
+    container_name: bank-auth-ui
+    ports:
+      - "8501:8501"
+    volumes:
+      - .:/usr/app
+    command: streamlit run streamlit_app.py --server.port=8501 --server.address=0.0.0.0
+    networks:
+      - bank-auth-network
+    depends_on:
+      - flasgger
+
+networks:
+  bank-auth-network:
+    driver: bridge

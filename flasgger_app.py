@@ -2,14 +2,19 @@ from flask import Flask,request
 import pandas as pd
 import numpy as np
 import pickle
+import os
 import flasgger
 from flasgger import Swagger
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(BASE_DIR, "data")
+CLASSIFIER_PATH = os.path.join(BASE_DIR, "classifier.pkl")
 
 app = Flask(__name__)
 Swagger(app)
 
-pickle_in=open("classifier.pkl","rb")
-classifier=pickle.load(pickle_in)
+pickle_in = open(CLASSIFIER_PATH, "rb")
+classifier = pickle.load(pickle_in)
 
 @app.route('/',methods=['GET'])
 def welcome():

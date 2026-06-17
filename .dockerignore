@@ -12,12 +12,8 @@ ENV/
 dist/
 build/
 *.sqlite3
-*.ipynb
-ModelTraining.ipynb
-BankNote_Authentication.csv
-TestFile.csv
 .git
 .gitignore
 node_modules/
 Dockerfile.*
-*.log
+*.logdata/

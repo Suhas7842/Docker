@@ -4,9 +4,14 @@ import numpy as np
 import pickle
 import streamlit as st
 from PIL import Image
+import os
 
-pickle_in=open("classifier.pkl","rb")
-classifier=pickle.load(pickle_in)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(BASE_DIR, "data")
+CLASSIFIER_PATH = os.path.join(BASE_DIR, "classifier.pkl")
+
+pickle_in = open(CLASSIFIER_PATH, "rb")
+classifier = pickle.load(pickle_in)
 
 def welcome():
     """
@@ -66,6 +71,14 @@ def main():
     if st.button("Predict"):
         result=predict_note_authentication(variance,skewness,curtosis,entropy)
     st.success('The output is {}'.format(result))
+
+    if st.button("Predict from data file"):
+        csv_path = os.path.join(DATA_DIR, "BankNote_Authentication.csv")
+        df = pd.read_csv(csv_path)
+        prediction = classifier.predict(df).tolist()
+        prediction = [int(x) for x in prediction]
+        st.success('Predictions from data file: {}'.format(prediction))
+
     if st.button("About"):
         st.text("Lets Learn")
         st.text("Built with Streamlit")
